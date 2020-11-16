@@ -7,9 +7,11 @@ import {
   Redirect
 } from 'react-router-dom';
 import styled from 'styled-components';
+import 'index.scss';
+
 const Wrapper = styled.div`
   border: 1px solid red;
-`
+`;
 
 function App() {
   return (
