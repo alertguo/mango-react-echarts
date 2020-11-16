@@ -1,16 +1,35 @@
-import React from "react";
+import React from 'react';
 import {
   HashRouter as Router,
   Switch,
   Route,
   Link,
   Redirect
-} from "react-router-dom";
+} from 'react-router-dom';
+import styled from 'styled-components';
+const Wrapper = styled.div`
+  border: 1px solid red;
+`
 
 function App() {
   return (
     <Router>
-      <div>
+      <Wrapper>
+        <Switch>
+          <Redirect exact from="/" to="money"/>
+          <Route path="/tags">
+            <Tags/>
+          </Route>
+          <Route path="/money">
+            <Money/>
+          </Route>
+          <Route path="/statistics">
+            <Statistics/>
+          </Route>
+          <Route path="*">
+            <NoMatch/>
+          </Route>
+        </Switch>
         <nav>
           <ul>
             <li>
@@ -25,22 +44,7 @@ function App() {
           </ul>
         </nav>
 
-        <Switch>
-          <Redirect exact from="/" to="money" />
-          <Route path="/tags">
-            <Tags />
-          </Route>
-          <Route path="/money">
-            <Money />
-          </Route>
-          <Route path="/statistics">
-            <Statistics />
-          </Route>
-          <Route path="*">
-            <NoMatch />
-          </Route>
-        </Switch>
-      </div>
+      </Wrapper>
     </Router>
   );
 }
@@ -56,6 +60,7 @@ function Money() {
 function Statistics() {
   return <h2>统计</h2>;
 }
+
 function NoMatch() {
   return <h2>该页面不存在</h2>;
 }
