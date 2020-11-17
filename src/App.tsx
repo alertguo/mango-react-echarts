@@ -27,8 +27,8 @@ function App() {
         <Main>
           <Switch>
             <Redirect exact from="/" to="money"/>
-            <Route path="/labels">
-              <Labels/>
+            <Route path="/label">
+              <Label/>
             </Route>
             <Route path="/money">
               <Money/>
@@ -47,7 +47,7 @@ function App() {
   );
 }
 
-function Labels() {
+function Label() {
   return <h2>标签</h2>;
 }
 
