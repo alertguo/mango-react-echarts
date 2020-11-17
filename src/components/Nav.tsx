@@ -14,7 +14,14 @@ const NavWrapper = styled.div`
     > li {
       width: 33.3333%;
       text-align: center;
-      padding: 16px;
+      padding: 4px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .icon {
+        width: 24px;
+        height: 24px;
+      }
     }
   }
 `;
