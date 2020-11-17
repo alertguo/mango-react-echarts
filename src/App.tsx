@@ -3,7 +3,6 @@ import {
   HashRouter as Router,
   Switch,
   Route,
-  Link,
   Redirect
 } from 'react-router-dom';
 import styled from 'styled-components';
@@ -28,8 +27,8 @@ function App() {
         <Main>
           <Switch>
             <Redirect exact from="/" to="money"/>
-            <Route path="/tags">
-              <Tags/>
+            <Route path="/labels">
+              <Labels/>
             </Route>
             <Route path="/money">
               <Money/>
@@ -48,7 +47,7 @@ function App() {
   );
 }
 
-function Tags() {
+function Labels() {
   return <h2>标签</h2>;
 }
 
