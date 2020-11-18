@@ -3,10 +3,8 @@ import React from 'react';
 import styled from 'styled-components';
 import TagsSelection from './Money/TagsSelection';
 import NotesSelection from './Money/NotesSelection';
+import TypeSelection from './Money/TypeSelection';
 
-const TypeSelection = styled.section`
-  
-`;
 const NumberPadSelection = styled.section`
   
 `;
@@ -16,7 +14,7 @@ function Money() {
     <Layout>
       <TypeSelection>
         <ul>
-          <li>支出</li>
+          <li className="selected">支出</li>
           <li>收入</li>
         </ul>
       </TypeSelection>
