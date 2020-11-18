@@ -1,13 +1,9 @@
 import Layout from '../components/Layout';
 import React from 'react';
-import styled from 'styled-components';
 import TagsSelection from './Money/TagsSelection';
 import NotesSelection from './Money/NotesSelection';
 import TypeSelection from './Money/TypeSelection';
-
-const NumberPadSelection = styled.section`
-  
-`;
+import NumberPadSelection from './Money/NumberPadSelection';
 
 function Money() {
   return (
@@ -36,10 +32,10 @@ function Money() {
         </label>
       </NotesSelection>
       <NumberPadSelection>
-        <div>
+        <div className="output">
           100
         </div>
-        <div>
+        <div className="pad clearfix">
           <button>1</button>
           <button>2</button>
           <button>3</button>
@@ -51,9 +47,9 @@ function Money() {
           <button>7</button>
           <button>8</button>
           <button>9</button>
-          <button>OK</button>
-          <button>0</button>
-          <button>.</button>
+          <button className="ok">OK</button>
+          <button className="zero">0</button>
+          <button className="dot">.</button>
         </div>
       </NumberPadSelection>
     </Layout>
