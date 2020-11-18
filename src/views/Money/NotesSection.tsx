@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const NotesSelection = styled.section`
+const NotesSection = styled.section`
   background: #f5f5f5;
   padding: 0 16px;
   font-size: 14px;
@@ -20,4 +20,4 @@ const NotesSelection = styled.section`
     }
   }
 `;
-export default NotesSelection;
+export default NotesSection;

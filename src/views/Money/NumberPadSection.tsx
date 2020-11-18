@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const NumberPadSelection = styled.section`
+const NumberPadSection = styled.section`
   display: flex;
   flex-direction: column;
   > .output {
@@ -52,4 +52,4 @@ const NumberPadSelection = styled.section`
   }
 `;
 
-export default NumberPadSelection;
+export default NumberPadSection;

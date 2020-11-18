@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const TypeSelection = styled.section`
+const TypeSection = styled.section`
   font-size: 24px;
   > ul {
     display: flex; 
@@ -24,4 +24,4 @@ const TypeSelection = styled.section`
   }
 `;
 
-export default TypeSelection;
+export default TypeSection;

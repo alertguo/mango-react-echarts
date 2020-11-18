@@ -1,9 +1,9 @@
 import Layout from '../components/Layout';
 import React from 'react';
-import TagsSelection from './Money/TagsSelection';
-import NotesSelection from './Money/NotesSelection';
-import TypeSelection from './Money/TypeSelection';
-import NumberPadSelection from './Money/NumberPadSelection';
+import TagsSection from './Money/TagsSection';
+import NotesSection from './Money/NotesSection';
+import TypeSection from './Money/TypeSection';
+import NumberPadSection from './Money/NumberPadSection';
 import styled from 'styled-components';
 
 const MyLayout = styled(Layout)`
@@ -13,13 +13,13 @@ const MyLayout = styled(Layout)`
 function Money() {
   return (
     <MyLayout>
-      <TypeSelection>
+      <TypeSection>
         <ul>
           <li className="selected">支出</li>
           <li>收入</li>
         </ul>
-      </TypeSelection>
-      <TagsSelection>
+      </TypeSection>
+      <TagsSection>
         <ol>
           <li>衣</li>
           <li>食</li>
@@ -29,14 +29,14 @@ function Money() {
         <button>
           新增标签
         </button>
-      </TagsSelection>
-      <NotesSelection>
+      </TagsSection>
+      <NotesSection>
         <label>
           <span>备注：</span>
           <input type="text" placeholder="点击添加备注"/>
         </label>
-      </NotesSelection>
-      <NumberPadSelection>
+      </NotesSection>
+      <NumberPadSection>
         <div className="output">
           100
         </div>
@@ -56,7 +56,7 @@ function Money() {
           <button className="zero">0</button>
           <button>.</button>
         </div>
-      </NumberPadSelection>
+      </NumberPadSection>
     </MyLayout>
   );
 }
