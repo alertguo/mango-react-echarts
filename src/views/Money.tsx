@@ -49,7 +49,7 @@ function Money() {
           <button>9</button>
           <button className="ok">OK</button>
           <button className="zero">0</button>
-          <button className="dot">.</button>
+          <button>.</button>
         </div>
       </NumberPadSelection>
     </Layout>
