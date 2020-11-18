@@ -28,4 +28,4 @@ const TagsSelection = styled.section`
     margin-top: 8px;
   }
 `;
-export default TagsSelection
+export default TagsSelection;

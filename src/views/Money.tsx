@@ -2,10 +2,8 @@ import Layout from '../components/Layout';
 import React from 'react';
 import styled from 'styled-components';
 import TagsSelection from './Money/TagsSelection';
+import NotesSelection from './Money/NotesSelection';
 
-const NotesSelection = styled.section`
-  border: 1px solid green;
-`;
 const TypeSelection = styled.section`
   
 `;
@@ -35,8 +33,8 @@ function Money() {
       </TagsSelection>
       <NotesSelection>
         <label>
-          <span>备注</span>
-          <input type="text"/>
+          <span>备注：</span>
+          <input type="text" placeholder="点击添加备注"/>
         </label>
       </NotesSelection>
       <NumberPadSelection>
