@@ -4,10 +4,15 @@ import TagsSelection from './Money/TagsSelection';
 import NotesSelection from './Money/NotesSelection';
 import TypeSelection from './Money/TypeSelection';
 import NumberPadSelection from './Money/NumberPadSelection';
+import styled from 'styled-components';
 
+const MyLayout = styled(Layout)`
+  display: flex;
+  flex-direction: column;
+`
 function Money() {
   return (
-    <Layout>
+    <MyLayout>
       <TypeSelection>
         <ul>
           <li className="selected">支出</li>
@@ -52,7 +57,7 @@ function Money() {
           <button>.</button>
         </div>
       </NumberPadSelection>
-    </Layout>
+    </MyLayout>
   );
 }
 
