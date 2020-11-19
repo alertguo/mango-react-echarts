@@ -47,7 +47,6 @@ const TagsSection: React.FC = () => {
 
   const onToggleTag = (tag: string) => {
     const index = selectedTags.indexOf(tag);
-    console.log(selectedTags);
     if (index >= 0) {
       // 如果 tag 已被选中，就复制所有没有被选中的 tag，作为新的 selectedTags
       setSelectedTags(selectedTags.filter(t => t !== tag));
@@ -70,4 +69,4 @@ const TagsSection: React.FC = () => {
     </Wrapper>
   );
 };
-export default TagsSection;
+export {TagsSection};
