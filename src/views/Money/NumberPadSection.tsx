@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {Wrapper} from './NumberPadSection/Wrapper';
+import {computeOutput} from './NumberPadSection/computeOutput';
 
 
 const NumberPadSection: React.FC = () => {
@@ -19,44 +20,12 @@ const NumberPadSection: React.FC = () => {
   const onClickButtonWrapper = (e: React.MouseEvent) => {
     const text = (e.target as HTMLButtonElement).textContent;
     if (text === null) {return; }
-    switch (text) {
-      case '0':
-      case '1':
-      case '2':
-      case '3':
-      case '4':
-      case '5':
-      case '6':
-      case '7':
-      case '8':
-      case '9':
-        if (output === '0') {
-          setOutput(text);
-        } else {
-          setOutput(output + text);
-        }
-        break;
-      case '.':
-        if (output.indexOf('.') >= 0) {
-          return;
-        } else {
-          setOutput(output + text);
-        }
-        break;
-      case '删除':
-        if (output.length === 1) {
-          setOutput('');
-        } else {
-          setOutput(output.slice(0, -1));
-        }
-        break;
-      case '清空':
-        setOutput('');
-        console.log('清空');
-        break;
-      case 'OK':
-        console.log('确认');
-        break;
+    if (text === 'OK') {
+      // TODO
+      return;
+    }
+    if ('0123456789.'.split('').concat(['删除', '清空']).indexOf(text) >= 0) {
+      setOutput(computeOutput(text, output));
     }
   };
   return (
