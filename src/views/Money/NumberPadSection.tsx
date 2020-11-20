@@ -82,9 +82,14 @@ const NumberPadSection: React.FC = () => {
         }
         break;
       case '删除':
-        console.log('删除');
+        if (output.length === 1) {
+          setOutput('0');
+        } else {
+          setOutput(output.slice(0, -1));
+        }
         break;
       case '清空':
+        setOutput('0');
         console.log('清空');
         break;
       case 'OK':
