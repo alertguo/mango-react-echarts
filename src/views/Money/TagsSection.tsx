@@ -1,5 +1,6 @@
 import styled from 'styled-components';
-import React, {useState} from 'react';
+import React from 'react';
+import {useTags} from '../../useTags';
 
 const Wrapper = styled.section`
   background: #ffffff;
@@ -38,7 +39,8 @@ type Props = {
 }
 // 表示除了默认的 children 之外，还可以拥有 Props 类型的
 const TagsSection: React.FC<Props> = (props) => {
-  const [tags, setTags] = useState<string[]>(['1', '2', '3', '4']);
+  // 析构赋值
+  const {tags, setTags} = useTags();
   const selectedTags = props.value;
   const onAddTag = () => {
     const tagName = window.prompt('标签名为');
