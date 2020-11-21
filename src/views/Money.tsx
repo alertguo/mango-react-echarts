@@ -20,13 +20,17 @@ function Money() {
     type: '-' as Type,
     amount: 0
   });
+  // Partial 可以只获取部分属性，不必要一一对应，全部都有
+  const onChange = (obj: Partial<typeof selected>) => {
+    setSelected({
+      ...selected,
+      ...obj
+    });
+  };
   return (
     <MyLayout>
       <TypeSection value={selected.type}
-                   onChange={(type) => setSelected({
-                     ...selected,
-                     type: type
-                   })}/>
+                   onChange={(type) => onChange({type})}/>
       {selected.tags.join(',')}
       <hr/>
       {selected.note}
@@ -35,26 +39,11 @@ function Money() {
       <hr/>
       {selected.amount}
       <TagsSection value={selected.tags}
-                   onChange={(tags) => {
-                     setSelected({
-                       ...selected,
-                       tags: tags
-                     });
-                   }}/>
+                   onChange={(tags) => onChange({tags})}/>
       <NotesSection value={selected.note}
-                    onChange={(note) => {
-                      setSelected({
-                        ...selected,
-                        note: note
-                      });
-                    }}/>
+                    onChange={(note) => onChange({note})}/>
       <NumberPadSection value={selected.amount}
-                        onChange={(amount) => {
-                          setSelected({
-                            ...selected,
-                            amount: amount
-                          });
-                        }}
+                        onChange={(amount) => onChange({amount})}
                         onOk={() => {}}
       />
     </MyLayout>
