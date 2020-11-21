@@ -6,24 +6,29 @@ import Label from './views/Label';
 import Statistics from './views/Statistics';
 import NoMatch from './views/NoMatch';
 import styled from 'styled-components';
+import {EditLabel} from './views/EditLabel';
 
 
 const AppWrapper = styled.div`
   color: #333;
-`
+`;
+
 function App() {
   return (
     <AppWrapper>
       <Router>
         <Switch>
           <Redirect exact from="/" to="money"/>
-          <Route path="/label">
+          <Route exact path="/label/:tag">
+            <EditLabel/>
+          </Route>
+          <Route exact path="/label">
             <Label/>
           </Route>
-          <Route path="/money">
+          <Route exact path="/money">
             <Money/>
           </Route>
-          <Route path="/statistics">
+          <Route exact path="/statistics">
             <Statistics/>
           </Route>
           <Route path="*">
