@@ -7,6 +7,7 @@ type Props = {
   onChange: (value: number) => void,
   onOk?: () => void
 }
+// NumberPadSection 是一个接受 props 的 React 函数组件
 const NumberPadSection: React.FC<Props> = (props) => {
   const output = props.value.toString();
   const setOutput = (output: string) => {
