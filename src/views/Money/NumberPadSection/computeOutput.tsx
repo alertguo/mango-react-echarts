@@ -19,6 +19,9 @@ const computeOutput = (text: string, output = '0') => {
       if (output.indexOf('.') >= 0) {
         return output;
       } else {
+        console.log('----');
+        console.log(output);
+        console.log(text);
         return output + text;
       }
     case '删除':

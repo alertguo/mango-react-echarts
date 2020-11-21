@@ -32,9 +32,14 @@ const Wrapper = styled.section`
     margin-top: 8px;
   }
 `;
-const TagsSection: React.FC = () => {
+type Props = {
+  value: string[],
+  onChange: (selected: string[]) => void
+}
+// 表示除了默认的 children 之外，还可以拥有 Props 类型的
+const TagsSection: React.FC<Props> = (props) => {
   const [tags, setTags] = useState<string[]>(['1', '2', '3', '4']);
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const selectedTags = props.value;
   const onAddTag = () => {
     const tagName = window.prompt('标签名为');
     if (tagName !== null) {
@@ -49,9 +54,9 @@ const TagsSection: React.FC = () => {
     const index = selectedTags.indexOf(tag);
     if (index >= 0) {
       // 如果 tag 已被选中，就复制所有没有被选中的 tag，作为新的 selectedTags
-      setSelectedTags(selectedTags.filter(t => t !== tag));
+      props.onChange(selectedTags.filter(t => t !== tag));
     } else {
-      setSelectedTags([...selectedTags, tag]);
+      props.onChange([...selectedTags, tag]);
     }
   };
   const getClass = (tag: string) => selectedTags.indexOf(tag) >= 0 ? 'selected' : '';
