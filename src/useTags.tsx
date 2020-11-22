@@ -5,7 +5,7 @@ const defaultTags = [
   {id: createId(), name: '1'},
   {id: createId(), name: '2'},
   {id: createId(), name: '3'},
-  {id: createId(), name: '4'},
+  {id: createId(), name: '0'},
 ]
 // use 开头是为了React规定
 const useTags = () => { // 封装一个自定义的 Hook
