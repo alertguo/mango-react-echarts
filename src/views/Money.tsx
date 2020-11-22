@@ -15,7 +15,7 @@ type Type = '-' | '+'
 
 function Money() {
   const [selected, setSelected] = useState({
-    tags: [] as string[],
+    tagIds: [] as number[],
     note: '',
     type: '-' as Type,
     amount: 0
@@ -31,15 +31,8 @@ function Money() {
     <MyLayout>
       <TypeSection value={selected.type}
                    onChange={(type) => onChange({type})}/>
-      {selected.tags.join(',')}
-      <hr/>
-      {selected.note}
-      <hr/>
-      {selected.type}
-      <hr/>
-      {selected.amount}
-      <TagsSection value={selected.tags}
-                   onChange={(tags) => onChange({tags})}/>
+      <TagsSection value={selected.tagIds}
+                   onChange={(tagIds) => onChange({tagIds})}/>
       <NotesSection value={selected.note}
                     onChange={(note) => onChange({note})}/>
       <NumberPadSection value={selected.amount}
