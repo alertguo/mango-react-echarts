@@ -19,7 +19,7 @@ function App() {
       <Router>
         <Switch>
           <Redirect exact from="/" to="money"/>
-          <Route exact path="/label/:tag">
+          <Route exact path="/label/:id">
             <EditLabel/>
           </Route>
           <Route exact path="/label">

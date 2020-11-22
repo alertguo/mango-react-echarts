@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
-import {useTags} from '../../useTags';
+import {useTags} from 'useTags';
+import {createId} from 'lib/createId';
 
 const Wrapper = styled.section`
   background: #ffffff;
@@ -48,7 +49,7 @@ const TagsSection: React.FC<Props> = (props) => {
       if (tags.map(t => t.name).indexOf(tagName) >= 0) {
         return window.alert('标签名重复');
       }
-      setTags([...tags, {id: Math.random(), name: tagName}]);
+      setTags([...tags, {id: createId(), name: tagName}]);
     }
   };
 
