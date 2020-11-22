@@ -6,9 +6,9 @@ type Params = {
   id: string
 }
 const EditLabel: React.FC = () => {
-  const {tags} = useTags();
+  const {findTag} = useTags();
   let {id} = useParams<Params>();
-  const tag = tags.filter(tag => tag.id === parseInt(id))[0];
+  const tag = findTag(parseInt(id))
   return (
     <div>{tag.name}</div>
   );
