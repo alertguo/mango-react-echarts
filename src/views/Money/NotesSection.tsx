@@ -16,21 +16,9 @@ const NotesSection: React.FC<Props> = (props) => {
   const onChange: ChangeEventHandler<HTMLInputElement> = (e)=>{
     props.onChange(e.target.value)
   }
-  // const refInput = useRef<HTMLInputElement>(null);
-  // const onBlur = () => {
-  //   if (refInput.current !== null) {
-  //     props.onChange(refInput.current.value);
-  //   }
-  // };
   return (
     <Wrapper>
       <Input label="备注：" type="text" value={note} onChange={onChange} placeholder="点击添加备注"/>
-      {/*<span>备注：</span>*/}
-      {/*<input type="text" placeholder="点击添加备注"*/}
-      {/*       ref={refInput}*/}
-      {/*       defaultValue={note}*/}
-      {/*       onBlur={onBlur}*/}
-      {/*/>*/}
     </Wrapper>
   );
 };
