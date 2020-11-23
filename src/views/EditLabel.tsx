@@ -6,6 +6,8 @@ import Icon from '../components/Icon';
 import {Button} from '../components/Button';
 import styled from 'styled-components';
 import {Input} from '../components/Input';
+import {Center} from '../components/Center';
+import {Space} from '../components/Space';
 
 type Params = {
   id: string
@@ -37,7 +39,10 @@ const EditLabel: React.FC = () => {
       <InputWrapper>
         <Input label="标签名：" type="text" placeholder="标签名" defaultValue={tag.name}/>
       </InputWrapper>
-      <Button>删除标签</Button>
+      <Center>
+        <Space/>
+        <Button>删除标签</Button>
+      </Center>
     </Layout>
   );
 };
