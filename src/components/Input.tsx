@@ -16,10 +16,12 @@ const Label = styled.label`
       border: none;
     }
 `;
+// 设置类型的时候 & React.InputHTMLAttributes<HTMLInputElement> 使其不用将每个使用到的方法的类型都写一遍
 type Props = {
   label: string
 } & React.InputHTMLAttributes<HTMLInputElement>
 const Input: React.FC<Props> = (props) => {
+  // ...rest 就是 HTML 的 input 除了 label、children 之外的所有方法
   const {label, children, ...rest} = props;
   return (
     <Label>
