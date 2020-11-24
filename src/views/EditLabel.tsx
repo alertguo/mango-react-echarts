@@ -48,10 +48,14 @@ const EditLabel: React.FC = () => {
       </div>
     );
   };
+  const onClickBack = () => {
+    console.log("window");
+    window.history.back()
+  }
   return (
     <Layout>
       <Topbar>
-        <Icon name="left"/>
+        <Icon name="left" onClick={onClickBack}/>
         <span>编辑标签</span>
         <Icon/>
       </Topbar>
