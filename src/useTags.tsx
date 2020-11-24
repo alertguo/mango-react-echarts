@@ -24,14 +24,10 @@ const useTags = () => { // 封装一个自定义的 Hook
   const updateTag = (id: number, obj: { name: string }) => {
     // 获取到在 tags 中对应的下标
     const index = findTagIndex(id);
-    console.log('index');
-    console.log(index);
-    // 深拷贝 tags
+    // 深拷贝 tags （React 不推荐改变原数组，如果发现还是原来的对象，会不做任何改变）
     let tagsClone = JSON.parse(JSON.stringify(tags));
     // 替换该项数据
     tagsClone.splice(index, 1, {id: id, name: obj.name});
-    console.log('tagsClone');
-    console.log(tagsClone);
     setTags(tagsClone);
   };
   // 返回接口,不能是返回数组，不然使用就报错
