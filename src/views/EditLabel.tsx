@@ -26,7 +26,7 @@ const InputWrapper = styled.div`
   margin-top: 8px;
 `;
 const EditLabel: React.FC = () => {
-  const {findTag, updateTag} = useTags();
+  const {findTag, updateTag, deleteTag} = useTags();
   let {id: idString} = useParams<Params>();
   const tag = findTag(parseInt(idString));
   return (
@@ -36,17 +36,22 @@ const EditLabel: React.FC = () => {
         <span>编辑标签</span>
         <Icon/>
       </Topbar>
-      <InputWrapper>
-        <Input label="标签名：" type="text" placeholder="标签名"
-               value={tag.name}
-               onChange={(e) => {
-                 updateTag(tag.id, {name: e.target.value});
-               }}/>
-      </InputWrapper>
-      <Center>
-        <Space/>
-        <Button>删除标签</Button>
-      </Center>
+      {tag ?
+        <div>
+          <InputWrapper>
+            <Input label="标签名：" type="text" placeholder="标签名"
+                   value={tag.name}
+                   onChange={(e) => {
+                     updateTag(tag.id, {name: e.target.value});
+                   }}/>
+          </InputWrapper>
+          <Center>
+            <Space/>
+            <Button onClick={() => {
+              deleteTag(tag.id);
+            }}>删除标签</Button>
+          </Center>
+        </div> : <Center><Space/>该标签不存在</Center>}
     </Layout>
   );
 };

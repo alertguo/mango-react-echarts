@@ -30,8 +30,16 @@ const useTags = () => { // 封装一个自定义的 Hook
     tagsClone.splice(index, 1, {id: id, name: obj.name});
     setTags(tagsClone);
   };
-  // 返回接口,不能是返回数组，不然使用就报错
-  return {tags, setTags, findTag, findTagIndex, updateTag};
+  const deleteTag = (id: number) => {
+    const index = findTagIndex(id);
+    // 深拷贝 tags （React 不推荐改变原数组，如果发现还是原来的对象，会不做任何改变）
+    let tagsClone = JSON.parse(JSON.stringify(tags));
+    // 替换该项数据
+    tagsClone.splice(index, 1);
+    setTags(tagsClone);
+  };
+  // 返回接口，不能是返回数组，不然使用就报错
+  return {tags, setTags, findTag, findTagIndex, updateTag,deleteTag};
 };
 
 export {useTags};
