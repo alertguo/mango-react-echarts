@@ -49,7 +49,6 @@ const EditLabel: React.FC = () => {
     );
   };
   const onClickBack = () => {
-    console.log("window");
     window.history.back()
   }
   return (
