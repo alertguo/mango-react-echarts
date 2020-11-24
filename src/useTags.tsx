@@ -36,7 +36,6 @@ const useTags = () => { // 封装一个自定义的 Hook
     // setTags(tagsClone);
   };
   const deleteTag = (id: number) => {
-    //使用 filter 替代下面的四行代码
     setTags(tags.filter(tag => tag.id !== id));
   };
   // 返回接口，不能是返回数组，不然使用就报错
