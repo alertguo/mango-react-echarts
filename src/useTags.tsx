@@ -1,15 +1,24 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {createId} from 'lib/createId';
 
-const defaultTags = [
-  {id: createId(), name: '1'},
-  {id: createId(), name: '2'},
-  {id: createId(), name: '3'},
-  {id: createId(), name: '0'},
-];
 // use 开头是为了React规定
 const useTags = () => { // 封装一个自定义的 Hook
-  const [tags, setTags] = useState<{ id: number, name: string }[]>(defaultTags);
+  const [tags, setTags] = useState<{ id: number, name: string }[]>([]);
+  useEffect(() => {
+    let localTags = JSON.parse(window.localStorage.getItem('tags') || '[]');
+    if(localTags.length === 0){
+      localTags = [
+        {id: createId(), name: '1'},
+        {id: createId(), name: '2'},
+        {id: createId(), name: '3'},
+        {id: createId(), name: '0'},
+      ]
+    }
+    setTags(localTags);
+  }, []); // 组件挂载时执行
+  useEffect(() => {
+    window.localStorage.setItem('tags', JSON.stringify(tags));
+  }, [tags]); // tags 必须是不可变数据才会触发
   const findTag = (id: number) => tags.filter(tag => tag.id === id)[0];
   const findTagIndex = (id: number) => {
     let result = -1;
@@ -41,7 +50,9 @@ const useTags = () => { // 封装一个自定义的 Hook
   const addTag = () => {
     const tagName = window.prompt('标签名为');
     if (tagName !== null) {
-      if (tags.map(t => t.name).indexOf(tagName) >= 0) {
+      if (tagName === '') {
+        return window.alert('标签名不能为空');
+      } else if (tags.map(t => t.name).indexOf(tagName) >= 0) {
         return window.alert('标签名重复');
       }
       setTags([...tags, {id: createId(), name: tagName}]);
