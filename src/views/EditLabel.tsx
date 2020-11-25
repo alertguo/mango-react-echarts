@@ -1,5 +1,5 @@
 import React from 'react';
-import {useParams} from 'react-router-dom';
+import {useParams, useHistory} from 'react-router-dom';
 import {useTags} from 'useTags';
 import Layout from 'components/Layout';
 import Icon from '../components/Icon';
@@ -27,6 +27,7 @@ const InputWrapper = styled.div`
 `;
 const EditLabel: React.FC = () => {
   const {findTag, updateTag, deleteTag} = useTags();
+  const history = useHistory();
   let {id: idString} = useParams<Params>();
   const tag = findTag(parseInt(idString));
   const tagContent = (tag: { id: number, name: string }) => {
@@ -49,8 +50,8 @@ const EditLabel: React.FC = () => {
     );
   };
   const onClickBack = () => {
-    window.history.back()
-  }
+    history.goBack();
+  };
   return (
     <Layout>
       <Topbar>
