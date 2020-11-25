@@ -6,9 +6,7 @@ import {useUpdate} from 'hooks/useUpdate';
 const useTags = () => { // 封装一个自定义的 Hook
   const [tags, setTags] = useState<{ id: number, name: string }[]>([]);
   useEffect(() => {
-    console.log('1');
     let localTags = JSON.parse(window.localStorage.getItem('tags') || '[]');
-    console.log('2');
     if (localTags.length === 0) {
       localTags = [
         {id: createId(), name: '1'},
@@ -19,7 +17,7 @@ const useTags = () => { // 封装一个自定义的 Hook
     }
     setTags(localTags);
   }, []); // 组件挂载时执行
-  
+
   useUpdate(() => {
     window.localStorage.setItem('tags', JSON.stringify(tags));
   }, [tags]); // tags 必须是不可变数据才会触发

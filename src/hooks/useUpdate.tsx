@@ -7,9 +7,7 @@ export const useUpdate = (fn: () => void, deps: any[]) => {
   });
   useEffect(() => {
     if (count.current > 1) {
-      console.log('w');
       fn();
-      console.log('q');
     }
   }, deps);
 };
