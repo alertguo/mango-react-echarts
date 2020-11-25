@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import React from 'react';
 import {useTags} from 'useTags';
-import {createId} from 'lib/createId';
 
 const Wrapper = styled.section`
   background: #ffffff;
@@ -41,17 +40,9 @@ type Props = {
 // 表示除了默认的 children 之外，还可以拥有 Props 类型的
 const TagsSection: React.FC<Props> = (props) => {
   // 析构赋值
-  const {tags, setTags} = useTags();
+  const {tags, addTag} = useTags();
   const selectedTagIds = props.value;
-  const onAddTag = () => {
-    const tagName = window.prompt('标签名为');
-    if (tagName !== null) {
-      if (tags.map(t => t.name).indexOf(tagName) >= 0) {
-        return window.alert('标签名重复');
-      }
-      setTags([...tags, {id: createId(), name: tagName}]);
-    }
-  };
+
 
   const onToggleTag = (tagId: number) => {
     const index = selectedTagIds.indexOf(tagId);
@@ -71,7 +62,7 @@ const TagsSection: React.FC<Props> = (props) => {
               className={getClass(tag.id)}
           >{tag.name}</li>)}
       </ol>
-      <button onClick={onAddTag}>
+      <button onClick={addTag}>
         新增标签
       </button>
     </Wrapper>

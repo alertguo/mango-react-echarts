@@ -38,8 +38,17 @@ const useTags = () => { // 封装一个自定义的 Hook
   const deleteTag = (id: number) => {
     setTags(tags.filter(tag => tag.id !== id));
   };
+  const addTag = () => {
+    const tagName = window.prompt('标签名为');
+    if (tagName !== null) {
+      if (tags.map(t => t.name).indexOf(tagName) >= 0) {
+        return window.alert('标签名重复');
+      }
+      setTags([...tags, {id: createId(), name: tagName}]);
+    }
+  };
   // 返回接口，不能是返回数组，不然使用就报错
-  return {tags, setTags, findTag, findTagIndex, updateTag, deleteTag};
+  return {tags, setTags, findTag, findTagIndex, updateTag, deleteTag, addTag};
 };
 
 export {useTags};
