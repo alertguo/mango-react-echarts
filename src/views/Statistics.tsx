@@ -19,6 +19,11 @@ const Item = styled.div`
     color: #999;
   }
 `;
+const Header = styled.h3`
+  font-size: 18px;
+  line-height: 20px;
+  padding: 10px 16px;
+`;
 
 function Statistics() {
   const [type, setType] = useState<'-' | '+'>('-');
@@ -29,12 +34,12 @@ function Statistics() {
   const selectedRecords = records.filter(r => r.type === type);
 
   selectedRecords.map(r => {
-    const key = dayjs(r.createdAt).format('YYYY-MM-DD');
+    const key = dayjs(r.createdAt).format('YYYY年MM月DD日');
     if (!(key in hash)) {
       hash[key] = [];
     }
     hash[key].push(r);
-    return hash
+    return hash;
   });
   const array = Object.entries(hash).sort((a, b) => {
     if (a[0] > b[0]) {
@@ -45,27 +50,30 @@ function Statistics() {
       return 1;
     }
   });
-  console.log(array);
   return (
     <Layout>
       <TypeSection value={type}
                    onChange={value => setType(value)}/>
-      <div>
-        {selectedRecords.map(r => {
-          return <Item key={r.createdAt}>
-            <div className="tags">
-              {r.tagIds.map(tagId => <span key={tagId}>{getName(tagId)}</span>)}
-            </div>
-            {r.note && <div className="note">
-              {r.note}
-            </div>}
-            <div className="amount">
-              ￥{r.amount}
-            </div>
-            {dayjs(r.createdAt).format('YYYY年MM月DD日')}
-          </Item>;
-        })}
-      </div>
+      {array.map(([date, records]) => <div>
+        <Header>
+          {date}
+        </Header>
+        <div>
+          {records.map(r => {
+            return <Item key={r.createdAt}>
+              <div className="tags">
+                {r.tagIds.map(tagId => <span key={tagId}>{getName(tagId)}</span>)}
+              </div>
+              {r.note && <div className="note">
+                {r.note}
+              </div>}
+              <div className="amount">
+                ￥{r.amount}
+              </div>
+            </Item>;
+          })}
+        </div>
+      </div>)}
     </Layout>
   );
 }
