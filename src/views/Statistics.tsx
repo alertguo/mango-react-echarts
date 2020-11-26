@@ -24,12 +24,14 @@ function Statistics() {
   const [type, setType] = useState<'-' | '+'>('-');
   const {records} = useRecords();
   const {getName} = useTags();
+  // 筛选类型
+  const selectedRecords = records.filter(r => r.type === type)
   return (
     <Layout>
       <TypeSection value={type}
                    onChange={value => setType(value)}/>
       <div>
-        {records.map(r => {
+        {selectedRecords.map(r => {
           return <Item>
             <div className="tags">
               {r.tagIds.map(tagId => <span>{getName(tagId)}</span>)}
