@@ -32,7 +32,7 @@ function Label() {
         {tags.map(tag =>
           <li key={tag.id}>
             <Link to={'/label/' + tag.id}>
-              <span className="oneLine">{tag.id}:{tag.name}</span>
+              <span className="oneLine">{tag.name}</span>
               <Icon name="right"/>
             </Link>
           </li>

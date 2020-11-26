@@ -23,9 +23,7 @@ const defaultRecord = {
 
 function Money() {
   const [selected, setSelected] = useState(defaultRecord);
-  const {records, addRecord} = useRecords();
-  console.log('records');
-  console.log(records);
+  const {addRecord} = useRecords();
   // Partial 可以只获取部分属性，不必要一一对应，全部都有
   const onChange = (obj: Partial<typeof selected>) => {
     setSelected({
@@ -38,7 +36,6 @@ function Money() {
   };
   return (
     <MyLayout>
-      {JSON.stringify(selected)}
       <TypeSection value={selected.type}
                    onChange={(type) => onChange({type})}/>
       <TagsSection value={selected.tagIds}
