@@ -11,6 +11,8 @@ const MyLayout = styled(Layout)`
   display: flex;
   flex-direction: column;
 `;
+type Type = '-' | '+'
+
 const defaultRecord = {
   tagIds: [] as number[],
   note: '',
@@ -18,7 +20,6 @@ const defaultRecord = {
   amount: 0
 };
 
-type Type = '-' | '+'
 
 function Money() {
   const [selected, setSelected] = useState(defaultRecord);
