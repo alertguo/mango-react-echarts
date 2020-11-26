@@ -1,9 +1,9 @@
 import Layout from 'components/Layout';
 import React, {useState} from 'react';
 import TypeSection from './Money/TypeSection';
-import {useRecords} from '../hooks/useRecords';
+import {RecordItem, useRecords} from '../hooks/useRecords';
 import {useTags} from '../hooks/useTags';
-// import dayjs from 'dayjs';
+import dayjs from 'dayjs';
 import styled from 'styled-components';
 
 const Item = styled.div`
@@ -24,17 +24,37 @@ function Statistics() {
   const [type, setType] = useState<'-' | '+'>('-');
   const {records} = useRecords();
   const {getName} = useTags();
+  const hash: { [K: string]: RecordItem[] } = {};
   // 筛选类型
-  const selectedRecords = records.filter(r => r.type === type)
+  const selectedRecords = records.filter(r => r.type === type);
+
+  selectedRecords.map(r => {
+    const key = dayjs(r.createdAt).format('YYYY-MM-DD');
+    if (!(key in hash)) {
+      hash[key] = [];
+    }
+    hash[key].push(r);
+    return hash
+  });
+  const array = Object.entries(hash).sort((a, b) => {
+    if (a[0] > b[0]) {
+      return -1;
+    } else if (a[0] === b[0]) {
+      return 0;
+    } else {
+      return 1;
+    }
+  });
+  console.log(array);
   return (
     <Layout>
       <TypeSection value={type}
                    onChange={value => setType(value)}/>
       <div>
         {selectedRecords.map(r => {
-          return <Item>
+          return <Item key={r.createdAt}>
             <div className="tags">
-              {r.tagIds.map(tagId => <span>{getName(tagId)}</span>)}
+              {r.tagIds.map(tagId => <span key={tagId}>{getName(tagId)}</span>)}
             </div>
             {r.note && <div className="note">
               {r.note}
@@ -42,7 +62,7 @@ function Statistics() {
             <div className="amount">
               ￥{r.amount}
             </div>
-            {/*{dayjs(r.createdAt).format('YYYY年MM月DD日')}*/}
+            {dayjs(r.createdAt).format('YYYY年MM月DD日')}
           </Item>;
         })}
       </div>
