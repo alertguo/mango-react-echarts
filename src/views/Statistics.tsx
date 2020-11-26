@@ -56,14 +56,14 @@ function Statistics() {
     <Layout>
       <TypeSection value={type}
                    onChange={value => setType(value)}/>
-      {array.map(([date, records]) => <div>
+      {array.map(([date, records]) => <div key={date}>
         <Header>
           {date}
           <div>
             ￥{records.map(a => {return a.amount;})
-              .reduce((sum, amount) => {
-                return sum + amount;
-              })}
+            .reduce((sum, amount) => {
+              return sum + amount;
+            })}
           </div>
         </Header>
         <div>
