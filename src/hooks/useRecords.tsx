@@ -19,11 +19,17 @@ export const useRecords = () => {
   }, [records]);
 
   const addRecord = (record: RecordItem) => {
-    if(record.tagIds.length === 0){return alert('请选择标签')}
-    if(record.amount<=0){return alert('您还没有输入记账金额')}
+    if (record.tagIds.length === 0) {
+      alert('请选择标签');
+      return false;
+    }
+    if (record.amount <= 0) {
+      alert('您还没有输入记账金额');
+      return false;
+    }
     setRecords([...records, record]);
     alert('已保存');
-    return true
+    return true;
   };
 
   return {records, addRecord};
