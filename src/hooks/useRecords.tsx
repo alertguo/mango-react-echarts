@@ -6,7 +6,9 @@ type RecordItem = {
   tagIds: number[]
   note: string
   amount: number
+  // createdAt: string // ISO 8601
 }
+// type newRecordItem = Omit<RecordItem, 'createdAt'>
 export const useRecords = () => {
   const [records, setRecords] = useState<RecordItem[]>([]);
   useEffect(() => {
@@ -17,7 +19,11 @@ export const useRecords = () => {
   }, [records]);
 
   const addRecord = (record: RecordItem) => {
+    if(record.tagIds.length === 0){return alert('请选择标签')}
+    if(record.amount<=0){return alert('您还没有输入记账金额')}
     setRecords([...records, record]);
+    alert('已保存');
+    return true
   };
 
   return {records, addRecord};

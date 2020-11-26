@@ -33,9 +33,7 @@ function Money() {
     });
   };
   const submit = () => {
-    addRecord(selected);
-    alert('已保存');
-    setSelected(defaultRecord);
+    addRecord(selected) && setSelected(defaultRecord);
   };
   return (
     <MyLayout>
