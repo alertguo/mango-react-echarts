@@ -61,8 +61,13 @@ const useTags = () => { // 封装一个自定义的 Hook
       setTags([...tags, {id: createId(), name: tagName}]);
     }
   };
+  // 已知 id ，获取对应的标签名
+  const getName = (id: number) => {
+    const tag = tags.find(t => t.id === id);
+    return tag ? tag.name : '';
+  };
   // 返回接口，不能是返回数组，不然使用就报错
-  return {tags, setTags, findTag, findTagIndex, updateTag, deleteTag, addTag};
+  return {tags, setTags, getName, findTag, findTagIndex, updateTag, deleteTag, addTag};
 };
 
 export {useTags};

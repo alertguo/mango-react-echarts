@@ -7,6 +7,7 @@ import {Link} from 'react-router-dom';
 import {Button} from 'components/Button';
 import {Center} from 'components/Center';
 import {Space} from 'components/Space';
+// import TypeSection from './Money/TypeSection';
 
 const TagList = styled.ol`
   font-size: 16px;
@@ -26,8 +27,12 @@ const TagList = styled.ol`
 
 function Label() {
   const {tags, addTag} = useTags();
+  // 注释为添加 type 切换，后面修改 type 切换显示不同的标签
+  // const [type, setType] = useState<'-' | '+'>('-');
   return (
     <Layout>
+      {/*<TypeSection value={type}*/}
+      {/*             onChange={value => setType(value)}/>*/}
       <TagList>
         {tags.map(tag =>
           <li key={tag.id}>
