@@ -23,6 +23,8 @@ const Header = styled.h3`
   font-size: 18px;
   line-height: 20px;
   padding: 10px 16px;
+  display: flex;
+  justify-content: space-between;
 `;
 
 function Statistics() {
@@ -57,6 +59,12 @@ function Statistics() {
       {array.map(([date, records]) => <div>
         <Header>
           {date}
+          <div>
+            ￥{records.map(a => {return a.amount;})
+              .reduce((sum, amount) => {
+                return sum + amount;
+              })}
+          </div>
         </Header>
         <div>
           {records.map(r => {
