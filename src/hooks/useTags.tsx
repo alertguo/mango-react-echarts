@@ -20,7 +20,7 @@ const useTags = () => { // 封装一个自定义的 Hook
 
   useUpdate(() => {
     window.localStorage.setItem('tags', JSON.stringify(tags));
-  }, [tags]); // tags 必须是不可变数据才会触发
+  }, tags); // tags 必须是不可变数据才会触发
 
   const findTag = (id: number) => tags.filter(tag => tag.id === id)[0];
   const findTagIndex = (id: number) => {
