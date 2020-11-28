@@ -10,7 +10,9 @@ import {EditLabel} from './views/EditLabel';
 
 
 const AppWrapper = styled.div`
+  max-width: 500px;
   color: #333;
+  margin: 0 auto;
 `;
 
 function App() {
