@@ -35,7 +35,7 @@ function Statistics() {
   // 筛选类型
   const selectedRecords = records.filter(r => r.type === type);
 
-  selectedRecords.map(r => {
+  selectedRecords.forEach(r => {
     const key = dayjs(r.createdAt).format('YYYY年MM月DD日');
     if (!(key in hash)) {
       hash[key] = [];
