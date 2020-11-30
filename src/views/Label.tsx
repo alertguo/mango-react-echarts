@@ -21,6 +21,10 @@ const TagList = styled.ol`
       display: flex;
       justify-content: space-between;
       align-items: center;
+      .tagIcon {
+        margin-right: auto;
+        margin-left: 4px;
+      }
     }
   }
 `;
@@ -38,7 +42,10 @@ function Label() {
         {typeTags.map(tag =>
           <li key={tag.id}>
             <Link to={'/label/' + tag.id}>
-              <span className="oneLine">{tag.name}</span>
+              <span className="oneLine">
+                {tag.name}
+              </span>
+              <Icon name={tag.svg} className="tagIcon"/>
               <Icon name="right"/>
             </Link>
           </li>
