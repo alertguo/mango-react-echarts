@@ -30,7 +30,7 @@ const TagList = styled.ol`
 `;
 
 function Label() {
-  const {tags, addTag} = useTags();
+  const {tags} = useTags();
   // 注释为添加 type 切换，后面修改 type 切换显示不同的标签
   const [type, setType] = useState<'-' | '+'>('-');
   const typeTags = tags.filter(t => t.type === type);
@@ -53,9 +53,11 @@ function Label() {
       </TagList>
       <Center>
         <Space/>
-        <Button onClick={addTag}>
-          新增标签
-        </Button>
+        <Link to={'/add'}>
+          <Button>
+            新增标签
+          </Button>
+        </Link>
       </Center>
     </Layout>
   );

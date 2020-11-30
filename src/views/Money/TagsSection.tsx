@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import React from 'react';
 import {useTags} from 'hooks/useTags';
 import Icon from '../../components/Icon';
+import {Link} from 'react-router-dom';
 
 const Wrapper = styled.section`
   background: #ffffff;
@@ -11,7 +12,7 @@ const Wrapper = styled.section`
   > ol {
     display: flex;
     flex-wrap: wrap;
-    margin: 0 -12px;
+    margin: 8px -12px;
     > li {
       display: flex;
       flex-direction: column;
@@ -19,7 +20,7 @@ const Wrapper = styled.section`
       align-items: center;
       font-size: 14px;
       padding-bottom: 16px;
-      .icon-wrapper{
+      .icon-wrapper, .addTag {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -56,7 +57,7 @@ type Props = {
 // 表示除了默认的 children 之外，还可以拥有 Props 类型的
 const TagsSection: React.FC<Props> = (props) => {
   // 析构赋值
-  const {tags, addTag} = useTags();
+  const {tags} = useTags();
   const selectedTagIds = props.value;
   const typeTags = tags.filter(t => t.type === props.type);
 
@@ -82,10 +83,15 @@ const TagsSection: React.FC<Props> = (props) => {
             </div>
             {tag.name}
           </li>)}
+        <li>
+          <Link to={'/add'}>
+            <div className="addTag">
+              <Icon name="addTag"/>
+            </div>
+          </Link>
+          创建
+        </li>
       </ol>
-      {/*<button onClick={addTag}>*/}
-      {/*  新增标签*/}
-      {/*</button>*/}
     </Wrapper>
   );
 };

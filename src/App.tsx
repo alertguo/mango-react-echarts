@@ -7,6 +7,7 @@ import Statistics from './views/Statistics';
 import NoMatch from './views/NoMatch';
 import styled from 'styled-components';
 import {EditLabel} from './views/EditLabel';
+import {AddTag} from './views/AddTag';
 
 
 const AppWrapper = styled.div`
@@ -26,6 +27,9 @@ function App() {
           </Route>
           <Route exact path="/label">
             <Label/>
+          </Route>
+          <Route exact path="/add">
+            <AddTag/>
           </Route>
           <Route exact path="/money">
             <Money/>
