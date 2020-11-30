@@ -1,6 +1,7 @@
 {
   "name": "mango-react",
   "version": "0.1.0",
+  "homepage": "https://guoxiaogao.top/mango-react-website/",
   "private": true,
   "dependencies": {
     "@babel/core": "7.12.3",
