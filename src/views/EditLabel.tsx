@@ -30,14 +30,14 @@ const EditLabel: React.FC = () => {
   const history = useHistory();
   let {id: idString} = useParams<Params>();
   const tag = findTag(parseInt(idString));
-  const tagContent = (tag: { id: number, name: string }) => {
+  const tagContent = (tag: { id: number, name: string, type: '-' | '+', svg: string }) => {
     return (
       <div>
         <InputWrapper>
           <Input label="标签名：" type="text" placeholder="标签名"
                  value={tag.name}
                  onChange={(e) => {
-                   updateTag(tag.id, {name: e.target.value});
+                   updateTag(tag.id, {name: e.target.value, type: tag.type, svg: tag.svg});
                  }}/>
         </InputWrapper>
         <Center>

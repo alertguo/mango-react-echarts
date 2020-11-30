@@ -4,15 +4,17 @@ import {useUpdate} from 'hooks/useUpdate';
 
 // use 开头是为了React规定
 const useTags = () => { // 封装一个自定义的 Hook
-  const [tags, setTags] = useState<{ id: number, name: string }[]>([]);
+  const [tags, setTags] = useState<{ id: number, name: string, type: '-' | '+', svg: string }[]>([]);
   useEffect(() => {
     let localTags = JSON.parse(window.localStorage.getItem('tags') || '[]');
     if (localTags.length === 0) {
       localTags = [
-        {id: createId(), name: '1'},
-        {id: createId(), name: '2'},
-        {id: createId(), name: '3'},
-        {id: createId(), name: '0'},
+        {id: createId(), name: '餐饮', type: '-', svg: '餐饮'},
+        {id: createId(), name: '购物', type: '-', svg: '购物'},
+        {id: createId(), name: '交通', type: '-', svg: '交通'},
+        {id: createId(), name: '日用', type: '-', svg: '日用'},
+        {id: createId(), name: '医疗', type: '-', svg: '医疗'},
+        {id: createId(), name: '工资', type: '+', svg: '工资'},
       ];
     }
     setTags(localTags);
@@ -33,10 +35,10 @@ const useTags = () => { // 封装一个自定义的 Hook
     }
     return result;
   };
-  const updateTag = (id: number, obj: { name: string }) => {
+  const updateTag = (id: number, obj: { name: string, type: '-' | '+', svg: string }) => {
     // 使用 map 替换深拷贝
     setTags(tags.map(tag => {
-        return tag.id === id ? {id: id, name: obj.name} : tag;
+        return tag.id === id ? {id, name: obj.name, type: obj.type, svg: obj.svg} : tag;
       }
     ));
     // // 获取到在 tags 中对应的下标
@@ -58,7 +60,7 @@ const useTags = () => { // 封装一个自定义的 Hook
       } else if (tags.map(t => t.name).indexOf(tagName) >= 0) {
         return window.alert('标签名重复');
       }
-      setTags([...tags, {id: createId(), name: tagName}]);
+      // setTags([...tags, {id: createId(), name: tagName}]);
     }
   };
   // 已知 id ，获取对应的标签名
