@@ -29,12 +29,13 @@ function Label() {
   const {tags, addTag} = useTags();
   // 注释为添加 type 切换，后面修改 type 切换显示不同的标签
   const [type, setType] = useState<'-' | '+'>('-');
+  const typeTags = tags.filter(t => t.type === type);
   return (
     <Layout>
       <TypeSection value={type}
                    onChange={value => setType(value)}/>
       <TagList>
-        {tags.map(tag =>
+        {typeTags.map(tag =>
           <li key={tag.id}>
             <Link to={'/label/' + tag.id}>
               <span className="oneLine">{tag.name}</span>

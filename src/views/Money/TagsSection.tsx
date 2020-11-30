@@ -34,6 +34,7 @@ const Wrapper = styled.section`
   }
 `;
 type Props = {
+  type: '-' | '+',
   value: number[],
   onChange: (selected: number[]) => void
 }
@@ -42,7 +43,7 @@ const TagsSection: React.FC<Props> = (props) => {
   // 析构赋值
   const {tags, addTag} = useTags();
   const selectedTagIds = props.value;
-
+  const typeTags = tags.filter(t => t.type === props.type);
 
   const onToggleTag = (tagId: number) => {
     const index = selectedTagIds.indexOf(tagId);
@@ -57,7 +58,7 @@ const TagsSection: React.FC<Props> = (props) => {
   return (
     <Wrapper>
       <ol>
-        {tags.map(tag =>
+        {typeTags.map(tag =>
           <li key={tag.id} onClick={() => onToggleTag(tag.id)}
               className={getClass(tag.id)}
           >{tag.name}</li>)}

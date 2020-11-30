@@ -39,6 +39,7 @@ function Money() {
       <TypeSection value={selected.type}
                    onChange={(type) => onChange({type})}/>
       <TagsSection value={selected.tagIds}
+                   type={selected.type}
                    onChange={(tagIds) => onChange({tagIds})}/>
       <NotesSection value={selected.note}
                     onChange={(note) => onChange({note})}/>
