@@ -1,26 +1,41 @@
 import styled from 'styled-components';
 import React from 'react';
 import {useTags} from 'hooks/useTags';
+import Icon from '../../components/Icon';
 
 const Wrapper = styled.section`
   background: #ffffff;
+  font-size: 14px;
   padding: 12px 16px;
   flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-start;
   > ol {
+    display: flex;
+    flex-wrap: wrap;
     margin: 0 -12px;
     > li {
-      background: #d9d9d9;
-      border-radius: 18px;
-      display: inline-block;
-      padding: 3px 18px;
+      display: flex;
+      flex-direction: column;
+      width: 25%;
+      align-items: center;
       font-size: 14px;
-      margin: 8px 12px;
+      padding-bottom: 16px;
+      .icon-wrapper{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #d9d9d988;
+        height: 36px;
+        width: 36px;
+        border-radius: 50%;
+        .icon {
+          width: 24px;
+          height: 24px;
+        }
+      }
       &.selected {
-        background: #f60;
+        .icon-wrapper{
+          background: #ffda44;
+        }
       }
     }
   }
@@ -61,11 +76,16 @@ const TagsSection: React.FC<Props> = (props) => {
         {typeTags.map(tag =>
           <li key={tag.id} onClick={() => onToggleTag(tag.id)}
               className={getClass(tag.id)}
-          >{tag.name}</li>)}
+          >
+            <div className="icon-wrapper">
+              <Icon name={tag.svg}/>
+            </div>
+            {tag.name}
+          </li>)}
       </ol>
-      <button onClick={addTag}>
-        新增标签
-      </button>
+      {/*<button onClick={addTag}>*/}
+      {/*  新增标签*/}
+      {/*</button>*/}
     </Wrapper>
   );
 };
