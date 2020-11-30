@@ -28,6 +28,7 @@ const Wrapper = styled.section`
         height: 36px;
         width: 36px;
         border-radius: 50%;
+        margin-bottom: 2px;
         .icon {
           width: 24px;
           height: 24px;
