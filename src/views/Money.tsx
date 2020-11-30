@@ -35,7 +35,7 @@ function Money() {
     addRecord(selected) && setSelected(defaultRecord);
   };
   return (
-    <MyLayout scrollTop={9999}>
+    <MyLayout scrollTop={0}>
       <TypeSection value={selected.type}
                    onChange={(type) => onChange({type})}/>
       <TagsSection value={selected.tagIds}
