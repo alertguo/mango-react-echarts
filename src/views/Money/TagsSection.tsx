@@ -36,7 +36,7 @@ const Wrapper = styled.section`
       }
       &.selected {
         .icon-wrapper{
-          background: #ffda44;
+          background: #ffda4488;
         }
       }
     }
