@@ -1,26 +1,29 @@
-import React, {useState} from 'react';
-import Layout from '../components/Layout';
+import React, {ChangeEventHandler, useState} from 'react';
+import Layout from 'components/Layout';
 import TypeSection from './Money/TypeSection';
-// import {Tag} from '../hooks/useTags';
+import {Tag, useTags} from '../hooks/useTags';
 import styled from 'styled-components';
-import {Input} from '../components/Input';
-import Icon from '../components/Icon';
-import {commonTagList} from '../lib/commonTagList';
-import {Button} from '../components/Button';
-import {Center} from '../components/Center';
-import {Space} from '../components/Space';
+import {Input} from 'components/Input';
+import Icon from 'components/Icon';
+import {commonTagList} from 'lib/commonTagList';
+import {Button} from 'components/Button';
+import {Center} from 'components/Center';
+import {Space} from 'components/Space';
+import {createId} from '../lib/createId';
 
-// const defaultTag = {
-//   id: 0,
-//   name: '',
-//   type: '-',
-//   svg: 'commonTag-0'
-// } as Tag;
+const defaultTag = {
+  id: 0,
+  name: '',
+  type: '-',
+  svg: 'commonTag-0'
+} as Tag;
 const InputWrapper = styled.div`
   display: flex;
   align-items: center;
   padding: 16px 32px;
   font-size: 16px;
+  border-bottom: 1px solid #d5d5d9;
+  margin-bottom: 16px;
   > .wrapper {
     display: flex;
     align-items: center;
@@ -75,20 +78,37 @@ const Tags = styled.div`
 
 export function AddTag() {
   const [type, setType] = useState<'-' | '+'>('-');
-  // const [tag, setTag] = useState(defaultTag);
+  const [tag] = useState(defaultTag);
+  // 注意区分这个获取的方法
+  const {tags,setTags} = useTags()
   // 默认的 selectedTag
   const [selectedTag, setSelectedTag] = useState<string[]>(['commonTag-0']);
   // 点击切换 selectedTag
   const onSelectedTag = (tagName: string) => {
     setSelectedTag([tagName]);
+    tag.svg = tagName;
   };
   // 添加选中的tag 的 class 为 'selected'
   const getClass = (tagName: string) => {
     return selectedTag.indexOf(tagName) >= 0 ? 'selected' : '';
   };
-  const add = () => {
-    console.log("x");
-  }
+  // 获取到 input 标签数据记录到 tag
+  const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    tag.name = e.target.value;
+  };
+  // const {addTag} = useTags();
+  // 提交数据
+  const submit = () => {
+    tag.type = type
+    tag.id = createId()
+    if (tag.name === ''){
+      return window.alert('标签名不能为空');
+    }else if(tags.map(t=> t.name).indexOf(tag.name)>= 0){
+      return window.alert('标签名重复');
+    }
+    setTags([...tags, tag]);
+    return window.alert('创建成功');
+  };
   return (
     <Layout>
       <TypeSection value={type}
@@ -97,7 +117,10 @@ export function AddTag() {
         <div className="wrapper">
           <Icon name={selectedTag[0]}/>
         </div>
-        <Input label="" type="text" placeholder="输入标签名(不超过5个字)"/>
+        <Input label="" type="text"
+               maxLength={5}
+               onChange={onChange}
+               placeholder="输入标签名(不超过5个字)"/>
       </InputWrapper>
       <Tags>
         <h3>
@@ -116,7 +139,7 @@ export function AddTag() {
       </Tags>
       <Center>
         <Space/>
-        <Button onClick={()=>{add()}}>
+        <Button onClick={submit}>
           新增标签
         </Button>
       </Center>
