@@ -6,6 +6,9 @@ import styled from 'styled-components';
 import {Input} from '../components/Input';
 import Icon from '../components/Icon';
 import {commonTagList} from '../lib/commonTagList';
+import {Button} from '../components/Button';
+import {Center} from '../components/Center';
+import {Space} from '../components/Space';
 
 // const defaultTag = {
 //   id: 0,
@@ -83,6 +86,9 @@ export function AddTag() {
   const getClass = (tagName: string) => {
     return selectedTag.indexOf(tagName) >= 0 ? 'selected' : '';
   };
+  const add = () => {
+    console.log("x");
+  }
   return (
     <Layout>
       <TypeSection value={type}
@@ -108,6 +114,12 @@ export function AddTag() {
             </li>)}
         </ol>
       </Tags>
+      <Center>
+        <Space/>
+        <Button onClick={()=>{add()}}>
+          新增标签
+        </Button>
+      </Center>
     </Layout>
   );
 }
