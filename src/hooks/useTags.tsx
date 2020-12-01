@@ -2,9 +2,15 @@ import {useEffect, useState} from 'react';
 import {createId} from 'lib/createId';
 import {useUpdate} from 'hooks/useUpdate';
 
+export type Tag = {
+  id: number,
+  name: string,
+  type: '-' | '+',
+  svg: string
+}
 // use 开头是为了React规定
-const useTags = () => { // 封装一个自定义的 Hook
-  const [tags, setTags] = useState<{ id: number, name: string, type: '-' | '+', svg: string }[]>([]);
+export const useTags = () => { // 封装一个自定义的 Hook
+  const [tags, setTags] = useState<Tag[]>([]);
   useEffect(() => {
     let localTags = JSON.parse(window.localStorage.getItem('tags') || '[]');
     if (localTags.length === 0) {
@@ -71,5 +77,3 @@ const useTags = () => { // 封装一个自定义的 Hook
   // 返回接口，不能是返回数组，不然使用就报错
   return {tags, setTags, getName, findTag, findTagIndex, updateTag, deleteTag, addTag};
 };
-
-export {useTags};
