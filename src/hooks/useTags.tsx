@@ -55,19 +55,27 @@ export const useTags = () => { // 封装一个自定义的 Hook
     // tagsClone.splice(index, 1, {id: id, name: obj.name});
     // setTags(tagsClone);
   };
+  // 删除标签
   const deleteTag = (id: number) => {
     setTags(tags.filter(tag => tag.id !== id));
   };
-  // const addTag = () => {
-  //   const tagName = window.prompt('标签名为');
-  //   if (tagName !== null) {
-  //     if (tagName === '') {
-  //       return window.alert('标签名不能为空');
-  //     } else if (tags.map(t => t.name).indexOf(tagName) >= 0) {
-  //       return window.alert('标签名重复');
-  //     }
-  //     // setTags([...tags, {id: createId(), name: tagName}]);
+  // 新增标签
+  // const addTag = (tag: Tag) => {
+  //   if (tag.name === '') {
+  //     window.alert('标签名不能为空');
+  //     return false;
+  //   } else if (tags.map(t => t.name).indexOf(tag.name) >= 0) {
+  //     window.alert('标签名重复');
+  //     return false;
   //   }
+  //   // 没有上面的失败情况才创建新的 id
+  //   tag.id = createId();
+  //   console.log(tag);
+  //   console.log(tags);
+  //   setTags([...tags,tag]);
+  //   console.log(tags);
+  //   alert('创建成功');
+  //   return true;
   // };
   // 已知 id ，获取对应的标签名
   const getName = (id: number) => {

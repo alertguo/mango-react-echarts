@@ -1,4 +1,5 @@
 import React, {ChangeEventHandler, useState} from 'react';
+import {useHistory} from 'react-router-dom'
 import Layout from 'components/Layout';
 import TypeSection from './Money/TypeSection';
 import {Tag, useTags} from '../hooks/useTags';
@@ -77,6 +78,7 @@ const Tags = styled.div`
 `;
 
 export function AddTag() {
+  const history = useHistory()
   const [type, setType] = useState<'-' | '+'>('-');
   const [tag] = useState(defaultTag);
   tag.type = type;
@@ -99,18 +101,29 @@ export function AddTag() {
     tag.name = e.target.value;
     return;
   };
-  // const {addTag} = useTags();
-  // 提交数据
-  const submit = () => {
+  // 新增标签
+  const addTag = () => {
     if (tag.name === '') {
-      return window.alert('标签名不能为空');
+      window.alert('标签名不能为空');
+      return false;
     } else if (tags.map(t => t.name).indexOf(tag.name) >= 0) {
-      return window.alert('标签名重复');
+      window.alert('标签名重复');
+      return false;
     }
     // 没有上面的失败情况才创建新的 id
     tag.id = createId();
+    console.log(tag);
+    console.log(tags);
     setTags([...tags, tag]);
-    return window.alert('创建成功');
+    console.log(tags);
+    alert('创建成功');
+    return true;
+  };
+  // 提交数据，并返回上一个页面
+  const submit = () => {
+    if(addTag()){
+      history.goBack()
+    }
   };
   return (
     <Layout>
@@ -142,9 +155,9 @@ export function AddTag() {
       </Tags>
       <Center>
         <Space/>
-        <Button onClick={submit}>
-          新增标签
-        </Button>
+          <Button onClick={submit}>
+            新增标签
+          </Button>
       </Center>
     </Layout>
   );
