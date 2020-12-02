@@ -80,7 +80,7 @@ export function AddTag() {
   const [type, setType] = useState<'-' | '+'>('-');
   const [tag] = useState(defaultTag);
   // 注意区分这个获取的方法
-  const {tags,setTags} = useTags()
+  const {tags, setTags} = useTags();
   // 默认的 selectedTag
   const [selectedTag, setSelectedTag] = useState<string[]>(['commonTag-0']);
   // 点击切换 selectedTag
@@ -99,11 +99,11 @@ export function AddTag() {
   // const {addTag} = useTags();
   // 提交数据
   const submit = () => {
-    tag.type = type
-    tag.id = createId()
-    if (tag.name === ''){
+    tag.type = type;
+    tag.id = createId();
+    if (tag.name === '') {
       return window.alert('标签名不能为空');
-    }else if(tags.map(t=> t.name).indexOf(tag.name)>= 0){
+    } else if (tags.map(t => t.name).indexOf(tag.name) >= 0) {
       return window.alert('标签名重复');
     }
     setTags([...tags, tag]);
