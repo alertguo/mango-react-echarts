@@ -47,13 +47,6 @@ export const useTags = () => { // 封装一个自定义的 Hook
         return tag.id === id ? {id, name: obj.name, type: obj.type, svg: obj.svg} : tag;
       }
     ));
-    // // 获取到在 tags 中对应的下标
-    // const index = findTagIndex(id);
-    // // 深拷贝 tags （React 不推荐改变原数组，如果发现还是原来的对象，会不做任何改变）
-    // let tagsClone = JSON.parse(JSON.stringify(tags));
-    // // 替换该项数据
-    // tagsClone.splice(index, 1, {id: id, name: obj.name});
-    // setTags(tagsClone);
   };
   // 删除标签
   const deleteTag = (id: number) => {

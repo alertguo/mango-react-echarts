@@ -81,7 +81,6 @@ export function AddTag() {
   const [type, setType] = useState<'-' | '+'>('-');
   const [tag] = useState(defaultTag);
   tag.type = type;
-  // 注意区分这个获取的方法
   const {addTag} = useTags();
   // 默认的 selectedTag
   const [selectedTag, setSelectedTag] = useState<string[]>(['commonTag-0']);
