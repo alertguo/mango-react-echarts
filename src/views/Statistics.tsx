@@ -5,6 +5,8 @@ import {RecordItem, useRecords} from '../hooks/useRecords';
 import {useTags} from '../hooks/useTags';
 import dayjs from 'dayjs';
 import styled from 'styled-components';
+import {Center} from '../components/Center';
+import {Space} from '../components/Space';
 
 const Item = styled.div`
   display:flex;
@@ -56,7 +58,8 @@ function Statistics() {
     <Layout>
       <TypeSection value={type}
                    onChange={value => setType(value)}/>
-      {array.map(([date, records]) => <div key={date}>
+      { array.length !== 0
+        ? array.map(([date, records]) => <div key={date}>
         <Header>
           {date}
           <div>
@@ -81,7 +84,13 @@ function Statistics() {
             </Item>;
           })}
         </div>
-      </div>)}
+      </div>)
+      : <div>
+          <Space/>
+          <Center>
+            "您没有相关记账"
+          </Center>
+      </div>}
     </Layout>
   );
 }
