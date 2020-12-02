@@ -30,7 +30,11 @@ const NumberPadSection: React.FC<Props> = (props) => {
     const text = (e.target as HTMLButtonElement).textContent;
     if (text === null) {return; }
     if (text === 'OK') {
-      if (props.onOk) {props.onOk()}
+      if (props.onOk) {
+        props.onOk()
+        // 解决记完账之后页面数据不重置为 0 的 bug
+        _setOutput('0')
+      }
       return;
     }
     if ('0123456789.'.split('').concat(['删除', '清空']).indexOf(text) >= 0) {
