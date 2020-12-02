@@ -63,13 +63,16 @@ const TagsSection: React.FC<Props> = (props) => {
   const typeTags = tags.filter(t => t.type === props.type);
 
   const onToggleTag = (tagId: number) => {
-    const index = selectedTagIds.indexOf(tagId);
-    if (index >= 0) {
-      // 如果 tag 已被选中，就复制所有没有被选中的 tag，作为新的 selectedTags
-      props.onChange(selectedTagIds.filter(t => t !== tagId));
-    } else {
-      props.onChange([...selectedTagIds, tagId]);
-    }
+    // 只能选择单个标签
+    props.onChange([tagId])
+    // // 下面方式可选择多个标签
+    // const index = selectedTagIds.indexOf(tagId);
+    // if (index >= 0) {
+    //   // 如果 tag 已被选中，就复制所有没有被选中的 tag，作为新的 selectedTags
+    //   props.onChange(selectedTagIds.filter(t => t !== tagId));
+    // } else {
+    //   props.onChange([...selectedTagIds, tagId]);
+    // }
   };
   const getClass = (tagId: number) => selectedTagIds.indexOf(tagId) >= 0 ? 'selected' : '';
   return (
