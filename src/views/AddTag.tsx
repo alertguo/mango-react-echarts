@@ -79,6 +79,7 @@ const Tags = styled.div`
 export function AddTag() {
   const [type, setType] = useState<'-' | '+'>('-');
   const [tag] = useState(defaultTag);
+  tag.type = type;
   // 注意区分这个获取的方法
   const {tags, setTags} = useTags();
   // 默认的 selectedTag
@@ -87,6 +88,7 @@ export function AddTag() {
   const onSelectedTag = (tagName: string) => {
     setSelectedTag([tagName]);
     tag.svg = tagName;
+    return;
   };
   // 添加选中的tag 的 class 为 'selected'
   const getClass = (tagName: string) => {
@@ -95,17 +97,18 @@ export function AddTag() {
   // 获取到 input 标签数据记录到 tag
   const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     tag.name = e.target.value;
+    return;
   };
   // const {addTag} = useTags();
   // 提交数据
   const submit = () => {
-    tag.type = type;
-    tag.id = createId();
     if (tag.name === '') {
       return window.alert('标签名不能为空');
     } else if (tags.map(t => t.name).indexOf(tag.name) >= 0) {
       return window.alert('标签名重复');
     }
+    // 没有上面的失败情况才创建新的 id
+    tag.id = createId();
     setTags([...tags, tag]);
     return window.alert('创建成功');
   };
