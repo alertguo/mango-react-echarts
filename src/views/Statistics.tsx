@@ -7,6 +7,7 @@ import dayjs from 'dayjs';
 import styled from 'styled-components';
 import {Center} from '../components/Center';
 import {Space} from '../components/Space';
+import {Chart} from '../components/Chart';
 
 const Item = styled.div`
   display:flex;
@@ -30,6 +31,24 @@ const Header = styled.h3`
 `;
 
 function Statistics() {
+  const [option,setOption] = useState({
+    title: {
+      text: 'ECharts 入门示例'
+    },
+    tooltip: {},
+    legend: {
+      data: ['销量']
+    },
+    xAxis: {
+      data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+    },
+    yAxis: {},
+    series: [{
+      name: '销量',
+      type: 'bar',
+      data: [5, 20, 36, 10, 10, 20]
+    }]
+  })
   const [type, setType] = useState<'-' | '+'>('-');
   const {records} = useRecords();
   const {getName} = useTags();
@@ -58,39 +77,40 @@ function Statistics() {
     <Layout>
       <TypeSection value={type}
                    onChange={value => setType(value)}/>
-      { array.length !== 0
+      <Chart option={option}/>
+      {array.length !== 0
         ? array.map(([date, records]) => <div key={date}>
-        <Header>
-          {date}
+          <Header>
+            {date}
+            <div>
+              ￥{records.map(a => {return a.amount;})
+              .reduce((sum, amount) => {
+                return sum + amount;
+              })}
+            </div>
+          </Header>
           <div>
-            ￥{records.map(a => {return a.amount;})
-            .reduce((sum, amount) => {
-              return sum + amount;
+            {records.map(r => {
+              return <Item key={r.createdAt}>
+                <div className="tags">
+                  {r.tagIds.map(tagId => <span key={tagId}>{getName(tagId)}</span>)}
+                </div>
+                {r.note && <div className="note">
+                  {r.note}
+                </div>}
+                <div className="amount">
+                  ￥{r.amount}
+                </div>
+              </Item>;
             })}
           </div>
-        </Header>
-        <div>
-          {records.map(r => {
-            return <Item key={r.createdAt}>
-              <div className="tags">
-                {r.tagIds.map(tagId => <span key={tagId}>{getName(tagId)}</span>)}
-              </div>
-              {r.note && <div className="note">
-                {r.note}
-              </div>}
-              <div className="amount">
-                ￥{r.amount}
-              </div>
-            </Item>;
-          })}
-        </div>
-      </div>)
-      : <div>
+        </div>)
+        : <div>
           <Space/>
           <Center>
             "您没有相关记账"
           </Center>
-      </div>}
+        </div>}
     </Layout>
   );
 }

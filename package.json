@@ -29,6 +29,7 @@
     "dayjs": "^1.9.6",
     "dotenv": "8.2.0",
     "dotenv-expand": "5.1.0",
+    "echarts": "^5.0.0",
     "eslint": "^7.11.0",
     "eslint-config-react-app": "^6.0.0",
     "eslint-plugin-flowtype": "^5.2.0",
@@ -103,6 +104,7 @@
   },
   "devDependencies": {
     "@types/classnames": "2.2.6",
+    "@types/echarts": "^4.9.2",
     "@types/react-router-dom": "^5.1.6",
     "@types/styled-components": "^5.1.4",
     "@types/webpack-env": "^1.15.3",
