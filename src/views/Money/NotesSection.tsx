@@ -8,21 +8,17 @@ const Wrapper = styled.section`
   font-size: 14px;
 `;
 type Props = {
-  value: string
-  labels: string
-  types: string
+  value: string,
   onChange: (value: string) => void
 }
 const NotesSection: React.FC<Props> = (props) => {
   const note = props.value;
-  const labels = props.labels;
-  const types = props.types;
-  const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    props.onChange(e.target.value);
-  };
+  const onChange: ChangeEventHandler<HTMLInputElement> = (e)=>{
+    props.onChange(e.target.value)
+  }
   return (
     <Wrapper>
-      <Input label={labels} type={types} value={note} onChange={onChange} placeholder="点击添加备注"/>
+      <Input label="备注：" type="text" value={note} onChange={onChange} placeholder="点击添加备注"/>
     </Wrapper>
   );
 };

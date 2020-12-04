@@ -6,7 +6,6 @@ import TypeSection from './Money/TypeSection';
 import NumberPadSection from './Money/NumberPadSection';
 import styled from 'styled-components';
 import {useRecords} from '../hooks/useRecords';
-import dayjs from 'dayjs';
 
 const MyLayout = styled(Layout)`
   display: flex;
@@ -19,7 +18,6 @@ const defaultRecord = {
   note: '',
   type: '-' as Type,
   amount: 0,
-  createAt: new Date().toISOString()
 };
 
 
@@ -36,10 +34,6 @@ function Money() {
   const submit = () => {
     addRecord(selected) && setSelected(defaultRecord);
   };
-  // 解决不显示默认的日期的 bug
-  const x = (isoString: string) => {
-    return dayjs(isoString).format('YYYY-MM-DDTHH:mm:ss')
-  }
   return (
     <MyLayout scrollTop={0}>
       <TypeSection value={selected.type}
@@ -47,13 +41,7 @@ function Money() {
       <TagsSection value={selected.tagIds}
                    type={selected.type}
                    onChange={(tagIds) => onChange({tagIds})}/>
-      <NotesSection value={x(selected.createAt)}
-                    labels="日期："
-                    types="datetime-local"
-                    onChange={(createAt) => onChange({createAt})}/>
       <NotesSection value={selected.note}
-                    labels="备注："
-                    types="text"
                     onChange={(note) => onChange({note})}/>
       <NumberPadSection value={selected.amount}
                         onChange={(amount) => onChange({amount})}
