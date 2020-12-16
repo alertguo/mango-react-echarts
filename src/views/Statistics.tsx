@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import {Center} from '../components/Center';
 import {Space} from '../components/Space';
 import {Chart} from '../components/Chart';
+import _ from 'lodash';
 
 const Item = styled.div`
   display:flex;
@@ -29,26 +30,82 @@ const Header = styled.h3`
   display: flex;
   justify-content: space-between;
 `;
+const ChartWrapper = styled.div`
+  overflow: auto;
+  background: white;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
 
 function Statistics() {
-  const [option,setOption] = useState({
-    title: {
-      text: 'ECharts 入门示例'
+  const [option, setOption] = useState({
+    grid: {
+      left: 0,
+      right: 0,
     },
-    tooltip: {},
+    tooltip: {
+      show: true,
+      // triggerOn: 'click',
+      // position: 'top',
+      formatter: '{c}',
+      // axisPointer: {
+      //   precision: 'auto', //保留所有小数
+      // },
+    },
     legend: {
       data: ['销量']
     },
     xAxis: {
-      data: ["衬衫", "羊毛衫", "雪纺衫", "裤子", "高跟鞋", "袜子"]
+      data: [
+        '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
+        '11', '12', '13', '14', '15', '16', '17', '18', '19', '20',
+        '21', '22', '23', '24', '25', '26', '27', '28', '29', '30',
+      ],
+      // type: 'category',
+      // x轴节点位置
+      axisTick: {
+        alignWithLabel: true,
+      },
+      lineStyle: {
+        color: '#333'
+      },
+      // axisLabel: {
+      //   formatter: function (value: string, index: number) {
+      //     // 格式化成月/日，只在第一个刻度显示年份
+      //     if (index === 0) {
+      //       return value.substr(0, 4);
+      //     }
+      //     return value.substr(5);
+      //   }
+      // }
     },
-    yAxis: {},
+    yAxis: {
+      // type: 'value',
+      // 不显示 y 轴
+      show: false,
+    },
     series: [{
-      name: '销量',
-      type: 'bar',
-      data: [5, 20, 36, 10, 10, 20]
+      // 转折点圆圈大小
+      symbolSize: 10,
+      //折线颜色
+      lineStyle: {
+        color: '#333',
+        width: 1
+      },
+      // 线条样式
+      itemStyle: {
+        color: '#ffda44',
+        borderColor: '#333',
+      },
+      type: 'line',
+      data: [
+        0, 20, 36, 10, 10, 20, 5, 20, 36, 10,
+        5, 20, 36, 10, 10, 20, 5, 20, 36, 10,
+        5, 20, 36, 10, 10, 20, 5, 20, 36, 10,
+      ]
     }]
-  })
+  });
   const [type, setType] = useState<'-' | '+'>('-');
   const {records} = useRecords();
   const {getName} = useTags();
@@ -73,11 +130,31 @@ function Statistics() {
       return 1;
     }
   });
+  // const x = () => {
+  const today = new Date();
+  const array1 = [];
+  const y = array.map(([date, records]) => {
+    return records.map(r => ({createAt: r.createdAt, amount: r.amount}));
+  });
+  for (let i = 0; i <= 29; i++) {
+    // 获取到30天的日期
+    const dateString = dayjs(today).subtract(i, 'day').format('YYYY-MM-DD');
+    // 找到对应的日期的值,不存在则为0
+    const found = _.find(records, {
+      createAt: dateString
+    });
+    array1.push({
+      key: dateString, value: found
+    });
+  }
+  // };
   return (
     <Layout>
       <TypeSection value={type}
                    onChange={value => setType(value)}/>
-      <Chart option={option}/>
+      <ChartWrapper>
+        <Chart option={option}/>
+      </ChartWrapper>
       {array.length !== 0
         ? array.map(([date, records]) => <div key={date}>
           <Header>
